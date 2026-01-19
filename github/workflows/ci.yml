@@ -3,15 +3,13 @@ name: Basic Workflow
 on:
   workflow_dispatch:
     inputs:
-
       name:
-        description: 'Person to greet'
+        description: Person to greet
         default: "World"
-        required: true 
+        required: true
         type: string
-
       city:
-        description: 'Favorite city'
+        description: Favorite city
         required: true
         default: "San Francisco"
         type: choice
@@ -20,19 +18,18 @@ on:
           - New York
           - Los Angeles
           - Chicago
-
       favorite_number:
-        description: 'Favorite number'
+        description: Favorite number
         required: true
-        default: '7'
+        default: "7"
         type: number
 
-      job:
-        greet:
-          name: "Greetings User"
-          runs-on: ubuntu-latest
-          steps:
-            - name: Send greeting
-              run: | 
-                echo "Hello ${{github.event.inputs.name}} from ${{github.event.inputs.city}}"
-                echo Is you favorite number  ${{github.event.inputs.favorite_number}}" 
+jobs:
+  greet:
+    name: "Greetings User"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send greeting
+        run: |
+          echo "Hello ${{ github.event.inputs.name }} from ${{ github.event.inputs.city }}"
+          echo "Is your favorite number ${{ github.event.inputs.favorite_number }}?"
